@@ -14,5 +14,11 @@
 # define PUSH_SWAP_H
 
 # include "libft/libft.h"
+# include <stdio.h>
+
+void    error_message(void);
+int		int_dup_check(int *num, const char *str, int len);
+void	free_alloc(t_list *stk1, int *num);
+int		unsorted_stack(t_list *stk1, t_list *stk2);
 
 #endif
