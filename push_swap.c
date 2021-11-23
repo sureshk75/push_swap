@@ -12,10 +12,10 @@
 
 #include "push_swap.h"
 
-char    **merge_split_args(char **argv)
+char	**merge_split_args(char **argv)
 {
-	char    *tmp1;
-	char    *tmp2;
+	char	*tmp1;
+	char	*tmp2;
 	char	**str;
 
 	tmp1 = ft_calloc(1, sizeof(char));
@@ -34,6 +34,23 @@ char    **merge_split_args(char **argv)
 	str = ft_split(tmp1, ' ');
 	free(tmp1);
 	return (str);
+}
+
+int	int_dup_check(int *num, const char *str, int len)
+{
+	int	nb;
+
+	nb = ft_atoi(str);
+	if (nb == -1 && (str[0] != '-' || str[1] != '0'))
+		return (1);
+	if (nb == 0 && str[0] != '0')
+		return (1);
+	while (len--)
+	{
+		if (num[len] == nb)
+			return (1);
+	}
+	return (0);
 }
 
 void	check_num(const char *str, int *noerr, int *num, int len)
@@ -60,6 +77,8 @@ int	*check_valid(char **str, int len)
 	int		noerr;
 	int		i;
 
+	if (len < 2)
+		return (0);
 	num = ft_calloc(len, sizeof(int));
 	if (!num)
 		return (0);
@@ -79,11 +98,11 @@ int	*check_valid(char **str, int len)
 	return (0);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_list  *stk1;
+	t_list	*stk1;
 	t_list	*stk2;
-	char    **str;
+	char	**str;
 	int		*num;
 	int		len;
 
@@ -102,7 +121,12 @@ int main(int argc, char **argv)
 	while (len--)
 		ft_lstadd_front(&stk1, ft_lstnew(&num[len]));
 	stk2 = NULL;
-	if (unsorted_stack(stk1, stk2))  // change to while statement when sorting function is complete
-		ft_putendl_fd("Stack Is Unsorted!", 0);
+	if (unsorted_stack(stk1, stk2))
+	{
+		common_solve(&stk1, &stk2);
+		ft_putendl_fd("Stack Is Not Sorted..", 1);
+	}
+	ft_putendl_fd("Stack Is Sorted!", 1);
 	free_alloc(stk1, num);
+	return (0);
 }
