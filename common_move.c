@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:53:50 by schetty           #+#    #+#             */
-/*   Updated: 2021/11/23 22:02:07 by schetty          ###   ########.fr       */
+/*   Updated: 2021/11/24 17:54:22 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,19 @@ static void	common_push(t_list **s1, t_list **s2, char *ins)
 
 	if (ft_strncmp(ins, "pa", 2) == 0)
 	{
-		tmp = *s1;
-		*s1 = (*s1)->next;
-		ft_lstadd_front(s2, tmp);
-	}
-	if (ft_strncmp(ins, "pb", 2) == 0)
-	{
 		tmp = *s2;
 		*s2 = (*s2)->next;
 		ft_lstadd_front(s1, tmp);
 	}
+	if (ft_strncmp(ins, "pb", 2) == 0)
+	{
+		tmp = *s1;
+		*s1 = (*s1)->next;
+		ft_lstadd_front(s2, tmp);
+	}
 }
 
-static void	common_reverse(t_list **s1, t_list **s2, char *ins)
+static void	common_rotate(t_list **s1, t_list **s2, char *ins)
 {
 	t_list	*tmp;
 
@@ -68,25 +68,25 @@ static void	common_reverse(t_list **s1, t_list **s2, char *ins)
 	}
 }
 
-static void	common_rreverse(t_list **s1, t_list **s2, char *ins)
+static void	common_rrotate(t_list **s1, t_list **s2, char *ins)
 {
 	t_list	*tmp;
 	t_list	*end;
 
 	if (ft_strncmp(ins, "rrr", 3) == 0 || ft_strncmp(ins, "rra", 3) == 0)
 	{
-		end = ft_lstlast(s1);
+		end = ft_lstlast(*s1);
 		tmp = *s1;
-		while (tmp->next != end->content)
+		while (tmp->next != end)
 			tmp = tmp->next;
 		tmp->next = 0;
 		ft_lstadd_front(s1, end);
 	}
 	if (ft_strncmp(ins, "rrr", 3) == 0 || ft_strncmp(ins, "rrb", 3) == 0)
 	{
-		end = ft_lstlast(s2);
+		end = ft_lstlast(*s2);
 		tmp = *s2;
-		while (tmp->next != end->content)
+		while (tmp->next != end)
 			tmp = tmp->next;
 		tmp->next = 0;
 		ft_lstadd_front(s2, end);
@@ -99,12 +99,10 @@ void	common_mover(t_list **stk1, t_list **stk2, char *ins)
 		common_swap(stk1, stk2, ins);
 	else if (ft_strncmp(ins, "p", 1) == 0)
 		common_push(stk1, stk2, ins);
+	else if (ft_strlen(ins) == 2)
+		common_rotate(stk1, stk2, ins);
 	else
-	{
-		if (ft_strlen(ins) == 2)
-			common_reverse(stk1, stk2, ins);
-		else
-			common_rreverse(stk1, stk2, ins);
-	}
-	ft_putendl_fd(ins, 1);
+		common_rrotate(stk1, stk2, ins);
+	// ft_putendl_fd(ins, 1);
+	printf("\n\n>>%s<<", ins);
 }

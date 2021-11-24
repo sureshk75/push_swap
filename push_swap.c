@@ -19,15 +19,12 @@ char	**merge_split_args(char **argv)
 	char	**str;
 
 	tmp1 = ft_calloc(1, sizeof(char));
-	if (tmp1)
+	while (tmp1 && *argv)
 	{
-		while (*argv)
-		{
-			tmp2 = ft_strjoin(tmp1, " ");
-			free(tmp1);
-			tmp1 = ft_strjoin(tmp2, *argv++);
-			free(tmp2);
-		}
+		tmp2 = ft_strjoin(tmp1, " ");
+		free(tmp1);
+		tmp1 = ft_strjoin(tmp2, *argv++);
+		free(tmp2);
 	}
 	if (!tmp1)
 		return (NULL);
@@ -121,12 +118,43 @@ int	main(int argc, char **argv)
 	while (len--)
 		ft_lstadd_front(&stk1, ft_lstnew(&num[len]));
 	stk2 = NULL;
-	if (unsorted_stack(stk1, stk2))
+	
+	t_list	*tmp;
+	char	moves[10][4] = {"pb", "pb", "pb", "ss", "rrr", "ss", "rr", "pa", "pa", "pa"};
+	int x = -1;
+	while (++x < 10 && unsorted_stack(stk1, stk2))
 	{
-		common_solve(&stk1, &stk2);
-		ft_putendl_fd("Stack Is Not Sorted..", 1);
+		tmp = stk1;
+		printf("\nSTACK 1: ");
+		while (tmp)
+		{
+			printf("->|%d|", *(int *)tmp->content);
+			tmp = tmp->next;
+		}
+		tmp = stk2;
+		printf("\nSTACK 2: ");
+		while (tmp)
+		{
+			printf("->|%d|", *(int *)tmp->content);
+			tmp = tmp->next;
+		}
+		common_solve(&stk1, &stk2, moves[x]);
 	}
-	ft_putendl_fd("Stack Is Sorted!", 1);
+	tmp = stk1;
+	printf("\nSTACK 1: ");
+	while (tmp)
+	{
+		printf("->|%d|", *(int *)tmp->content);
+		tmp = tmp->next;
+	}
+	tmp = stk2;
+	printf("\nSTACK 2: ");
+	while (tmp)
+	{
+		printf("->|%d|", *(int *)tmp->content);
+		tmp = tmp->next;
+	}
+	printf("\n");
 	free_alloc(stk1, num);
 	return (0);
 }

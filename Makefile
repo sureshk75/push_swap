@@ -6,7 +6,7 @@
 #    By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 09:45:57 by schetty           #+#    #+#              #
-#    Updated: 2021/11/22 12:35:43 by schetty          ###   ########.fr        #
+#    Updated: 2021/11/24 14:20:34 by schetty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ CC			:=	gcc
 NAME		:=	pushswap
 
 # Binary Programs
-PROG1		:=	push_swap
-PROG2		:=	checker
+APP1		:=	push_swap
+APP2		:=	checker
 
 # Directories
 OBJDIR		:=	obj/
@@ -42,8 +42,9 @@ YLW			:=	"\033[1;33m"
 CLR			:=	"\033[0m"
 
 # Source, Objects and Resources
-PROG1_SOURCE:=	push_swap.c		push_swap_utils.c
-PROG2_SOURCE:=	checker.c
+APP1_SOURCE	:=	push_swap.c		push_swap_utils.c
+APP2_SOURCE	:=	checker.c
+COMM_SOURCE	:=	common_move.c common_solve.c
 
 # Defauilt Make
 all			:	outdir $(NAME)
@@ -54,14 +55,14 @@ outdir		:
 bonus		:	outdir $(NAME)
 
 # Link
-$(NAME)		:	$(PROG1)	#$(PROG2)
+$(NAME)		:	$(APP1)	#$(APP2)
 				@ echo $(GRN)$(NAME)$(CLR) Generated Successfully!
 
-$(PROG1)	:	$(LIBFT)
-				@ $(CC) $(CFLAGS) $(PROG1_SOURCE) $(LIBFT) -o $(PROG1)
+$(APP1)	:	$(LIBFT)
+				@ $(CC) $(CFLAGS) $(APP1_SOURCE) $(COMM_SOURCE) $(LIBFT) -o $(APP1)
 
-$(PROG2)	:	$(LIBFT)
-				@ $(CC) $(CFLAGS) $(PROG2_SOURCE) $(LIBFT) -o $(PROG2)
+$(APP2)	:	$(LIBFT)
+				@ $(CC) $(CFLAGS) $(APP2_SOURCE) $(COMM_SOURCE) $(LIBFT) -o $(APP2)
 
 $(LIBFT)	:
 				@ $(MAKE) -C $(LIBFTDIR) --no-print-directory
@@ -78,9 +79,9 @@ endif
 
 # Full Clean
 fclean		:
-ifneq ($(wildcard $(PROG1))$(wildcard $(PROG2)),)
+ifneq ($(wildcard $(APP1))$(wildcard $(APP2)),)
 	@ $(MAKE) fclean -C $(LIBFTDIR) --no-print-directory
-	@ $(DELETE) $(PROG1) $(PROG2)
+	@ $(DELETE) $(APP1) $(APP2)
 	@ $(DELETEDIR) $(OBJDIR)
 	@ echo $(YLW)$(basename $(NAME))$(CLR) Binary \& Object Files Deleted!
 else
