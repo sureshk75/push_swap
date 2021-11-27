@@ -19,20 +19,20 @@
 typedef struct	s_flag
 {
 	int			len;
-	int			n1;
-	int			n2;
-	int			n3;
-	int			psh;
-	int			swp;
-	int			rev;
-	int			rrv;
+	int			max_val;
+	int			max_pos;
+	int			min_val;
+	int			min_pos;
+	int			mean;
 }				t_flag;
 
+char	**common_merge_split_args(char **argv);
+int		*common_check_valid(char **str, int len);
 void	error_message(void);
 void	free_alloc(t_list *stk1, int *num);
 int		unsorted_stack(t_list *stk1, t_list *stk2);
 void	common_init(t_flag *flg, t_list *stk, int isstk1);
 void	common_mover(t_list **stk1, t_list **stk2, char *ins);
-void	common_solve(t_list	**stk1, t_list **stk2, char *tmp);
+void	common_solve(t_list	**stk1, t_list **stk2, int len);
 
 #endif

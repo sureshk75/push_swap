@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:53:50 by schetty           #+#    #+#             */
-/*   Updated: 2021/11/24 17:54:22 by schetty          ###   ########.fr       */
+/*   Updated: 2021/11/26 12:24:58 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,5 @@ void	common_mover(t_list **stk1, t_list **stk2, char *ins)
 		common_rotate(stk1, stk2, ins);
 	else
 		common_rrotate(stk1, stk2, ins);
-	// ft_putendl_fd(ins, 1);
-	printf("\n\n>>%s<<", ins);
+	ft_putendl_fd(ins, 1);
 }
