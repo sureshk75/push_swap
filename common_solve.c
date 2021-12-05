@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 22:04:29 by schetty           #+#    #+#             */
-/*   Updated: 2021/11/27 09:31:58 by schetty          ###   ########.fr       */
+/*   Updated: 2021/12/05 03:30:16 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	common_init(t_flag *flg, t_list *stk, int len)
 		i = -1;
 		flg->min_val = len;
 		flg->max_val = 0;
-		while(++i && stk)
+		while (++i && stk)
 		{
 			if (*(int *)stk > flg->max_val)
 			{
@@ -40,7 +40,9 @@ void	common_init(t_flag *flg, t_list *stk, int len)
 }
 
 static char	*common_ins(t_flag *flg1, t_flag *flg2)
-{}
+{
+	return (NULL);
+}
 // static char	*common_ins(t_flag *flg1, t_flag *flg2, int len)
 // {
 // 	if (flg1->rrv && flg2->rrv)
@@ -76,9 +78,8 @@ static int	get_highest_unordered_value(t_list *stk, int len)
 	i = -1;
 	while (--len > -1 && ++i)
 	{
-		
+		i = len;
 	}
-		
 }
 
 void	common_solve(t_list	**stk1, t_list **stk2, int len)

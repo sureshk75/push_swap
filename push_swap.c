@@ -14,29 +14,26 @@
 
 int	main(int argc, char **argv)
 {
-	t_list	*stk1;
-	t_list	*stk2;
+	t_list	*s1;
+	t_list	*s2;
 	char	**str;
 	int		*num;
 	int		len;
 
 	if (argc == 1)
-		error_message();
-	str = common_merge_split_args(argv + 1);
-	if (!str)
-		error_message();
+		common_message_output(1);
 	len = 0;
-	while (str[len])
-		len++;
+	str = common_check_merge_split(argv + 1, &len);
+	if (!str || len < 2)
+		common_message_output(1);
 	num = common_check_valid(str, len);
 	if (!num)
-		error_message();
-	stk1 = NULL;
+		common_message_output(1);
+	s1 = NULL;
 	while (len--)
-		ft_lstadd_front(&stk1, ft_lstnew(&num[len]));
-	stk2 = NULL;
-	while (unsorted_stack(stk1, stk2))
-		common_solve(&stk1, &stk2, len);
-	free_alloc(stk1, num);
-	return (0);
+		ft_lstadd_front(&s1, ft_lstnew(&num[len]));
+	s2 = NULL;
+	while (common_check_is_unsorted(s1, s2, num))
+		common_solve(&s1, &s2, len);
+	free_alloc(s1, num);
 }
