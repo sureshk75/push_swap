@@ -6,7 +6,7 @@
 #    By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 09:45:57 by schetty           #+#    #+#              #
-#    Updated: 2021/12/05 03:19:54 by schetty          ###   ########.fr        #
+#    Updated: 2021/12/10 19:26:05 by schetty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,8 @@ CLR			:=	"\033[0m"
 # Source, Objects and Resources
 APP1_SOURCE	:=	push_swap.c
 APP2_SOURCE	:=	checker.c
-COMM_SOURCE	:=	common_check.c		common_message.c	common_move.c 		\
-				common_solve.c
+COMM_SOURCE	:=	common_check.c		common_move.c		common_solve.c	\
+				common_utils.c
 
 # Defauilt Make
 all			:	outdir $(NAME)

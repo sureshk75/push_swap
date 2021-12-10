@@ -6,13 +6,13 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:53:50 by schetty           #+#    #+#             */
-/*   Updated: 2021/11/26 12:24:58 by schetty          ###   ########.fr       */
+/*   Updated: 2021/12/11 02:20:00 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	common_swap(t_list **s1, t_list **s2, char *ins)
+static void	common_move_swap(t_list **s1, t_list **s2, char *ins)
 {
 	t_list	*tmp;
 
@@ -30,7 +30,7 @@ static void	common_swap(t_list **s1, t_list **s2, char *ins)
 	}
 }
 
-static void	common_push(t_list **s1, t_list **s2, char *ins)
+static void	common_move_push(t_list **s1, t_list **s2, char *ins)
 {
 	t_list	*tmp;
 
@@ -48,7 +48,7 @@ static void	common_push(t_list **s1, t_list **s2, char *ins)
 	}
 }
 
-static void	common_rotate(t_list **s1, t_list **s2, char *ins)
+static void	common_move_rotate(t_list **s1, t_list **s2, char *ins)
 {
 	t_list	*tmp;
 
@@ -68,7 +68,7 @@ static void	common_rotate(t_list **s1, t_list **s2, char *ins)
 	}
 }
 
-static void	common_rrotate(t_list **s1, t_list **s2, char *ins)
+static void	common_move_rrotate(t_list **s1, t_list **s2, char *ins)
 {
 	t_list	*tmp;
 	t_list	*end;
@@ -93,15 +93,16 @@ static void	common_rrotate(t_list **s1, t_list **s2, char *ins)
 	}
 }
 
-void	common_mover(t_list **stk1, t_list **stk2, char *ins)
+void	common_move_execute(t_list **s1, t_list **s2, char *ins, int prn)
 {
 	if (ft_strncmp(ins, "s", 1) == 0)
-		common_swap(stk1, stk2, ins);
+		common_move_swap(s1, s2, ins);
 	else if (ft_strncmp(ins, "p", 1) == 0)
-		common_push(stk1, stk2, ins);
+		common_move_push(s1, s2, ins);
 	else if (ft_strlen(ins) == 2)
-		common_rotate(stk1, stk2, ins);
+		common_move_rotate(s1, s2, ins);
 	else
-		common_rrotate(stk1, stk2, ins);
-	ft_putendl_fd(ins, 1);
+		common_move_rrotate(s1, s2, ins);
+	if (prn)
+		ft_putendl_fd(ins, 1);
 }

@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 10:07:49 by schetty           #+#    #+#             */
-/*   Updated: 2021/12/05 03:28:44 by schetty          ###   ########.fr       */
+/*   Updated: 2021/12/09 20:29:49 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ int	common_check_is_unsorted(t_list *s1, t_list *s2, int *num)
 
 	if (s2)
 		return (1);
-	while (s1)
+	tmp = s1;
+	while (tmp)
 	{
-		if (s1->next && *(int *)s1->content > *(int *)s1->next->content)
+		if (tmp->next && *(int *)tmp->content > *(int *)tmp->next->content)
 			return (1);
-		s1 = s1->next;
+		tmp = tmp->next;
 	}
 	while (s1)
 	{
@@ -99,11 +100,14 @@ static int	*common_check_presort(int *n1, int *n2, int len, int cur)
 		while (++i < len)
 		{
 			if (n2[i] == cur)
+			{
+				if (n1[i] <= j)
+				{
+					j = n1[i];
+					k = i;
+				}
 				n2[i] += 1;
-			if (n2[i] == cur && n1[i] <= j)
-				k = i;
-			if (n2[i] == cur && n1[i] <= j)
-				j = n1[i];
+			}
 		}
 		n2[k] -= 1;
 	}

@@ -18,21 +18,32 @@
 
 typedef struct s_flag
 {
-	int	len;
-	int	max_val;
-	int	max_pos;
-	int	min_val;
-	int	min_pos;
-	int	mean;
+	int	s1s;
+	int	s2s;
+	int	s1l;
+	int	s1r;
+	int	s1t;
+	int	s2r;
+	int	s2t;
+	int	t1r;
+	int	t1t;
+	int	t2r;
+	int	t2t;
+	int	mxv;
+	int	mxp;
+	int	mxt;
+	int	mnv;
+	int	mnp;
 }	t_flag;
 
-void	common_message_output(int errno);
 char	**common_check_merge_split(char **argv, int *len);
 int		*common_check_valid(char **str, int len);
 int		common_check_is_unsorted(t_list *s1, t_list *s2, int *num);
-
-void	common_init(t_flag *flg, t_list *stk, int isstk1);
-void	common_mover(t_list **stk1, t_list **stk2, char *ins);
-void	common_solve(t_list	**stk1, t_list **stk2, int len);
+void	common_solve_run(t_list **s1, t_list **s2, int *num);
+void	common_move_execute(t_list **s1, t_list **s2, char *ins, int prn);
+void	common_utils_init_flags(t_list *s1, t_list *s2, t_flag *flg, int pos);
+void	common_utils_init_stack2(t_list **s1, t_list **s2);
+void	common_utils_output(int errno);
+int		common_utils_gnl(char **str);
 
 #endif
