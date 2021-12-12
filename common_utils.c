@@ -59,7 +59,9 @@ void	common_utils_init_flags(t_list *s1, t_list *s2, t_flag *flg, int pos)
 
 void	common_utils_output(int errno)
 {
-	if (errno == 1)
+	if (errno == 0)
+		write(1, "\n", 1);
+	else if (errno == 1)
 		ft_putendl_fd("Error", 1);
 	else if (errno == 2)
 		ft_putendl_fd("KO", 1);
@@ -88,4 +90,11 @@ int	common_utils_gnl(char **str)
 		return (0);
 	}
 	return (-1);
+}
+
+int	common_utils_count_moves(int pos, int size)
+{
+	if (pos < (size / 2) || size == 1)
+		return (pos);
+	return (size - pos);
 }

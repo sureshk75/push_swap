@@ -51,7 +51,7 @@ static void	checker_listen(t_list **s1, t_list **s2, int *num)
 		}
 	}
 	if (ret == 0 && !common_check_is_unsorted(*s1, *s2, num))
-		common_utils_output(0);
+		common_utils_output(3);
 	if (s1 || s2 || num)
 		checker_exit(*s1, *s2, num);
 	if (ret == 0)
@@ -69,10 +69,10 @@ int	main(int argc, char **argv)
 	int		len;
 
 	if (argc == 1)
-		return (0);
+		common_utils_output(0);
 	len = 0;
 	str = common_check_merge_split(argv + 1, &len);
-	if (!str || len == 1)
+	if (!str)
 		common_utils_output(1);
 	num = common_check_valid(str, len);
 	if (!num)

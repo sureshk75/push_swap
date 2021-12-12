@@ -21,10 +21,10 @@ int	main(int argc, char **argv)
 	int		len;
 
 	if (argc == 1)
-		common_utils_output(1);
+		common_utils_output(0);
 	len = 0;
 	str = common_check_merge_split(argv + 1, &len);
-	if (!str || len == 1)
+	if (!str)
 		common_utils_output(1);
 	num = common_check_valid(str, len);
 	if (!num)

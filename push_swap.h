@@ -39,11 +39,12 @@ typedef struct s_flag
 char	**common_check_merge_split(char **argv, int *len);
 int		*common_check_valid(char **str, int len);
 int		common_check_is_unsorted(t_list *s1, t_list *s2, int *num);
-void	common_solve_run(t_list **s1, t_list **s2, int *num);
 void	common_move_execute(t_list **s1, t_list **s2, char *ins, int prn);
+void	common_solve_run(t_list **s1, t_list **s2, int *num);
+int		common_utils_count_moves(int pos, int size);
+int		common_utils_gnl(char **str);
 void	common_utils_init_flags(t_list *s1, t_list *s2, t_flag *flg, int pos);
 void	common_utils_init_stack2(t_list **s1, t_list **s2);
 void	common_utils_output(int errno);
-int		common_utils_gnl(char **str);
 
 #endif

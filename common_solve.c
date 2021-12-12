@@ -26,39 +26,30 @@ static void	common_solve_get_closest(t_list *s, int n, t_flag *f, int i)
 		if ((n1 < n2 && n > n1 && n < n2) || (n1 > n2 && (n > n1 || n < n2)))
 			mv = i + 1;
 	}
+	f->t1r = common_utils_count_moves(mv, f->s1s);
+	f->t1t = 1;
 	if (mv < (f->s1s / 2))
-	{
-		f->t1r = mv;
 		f->t1t = 0;
-	}
-	else
-	{
-		f->t1r = f->s1s - mv;
-		f->t1t = 1;
-	}
 }
 
 static void	common_solve_rotations(t_list *s1, t_list *s2, t_flag *f, int p)
 {
 	while (++p < f->s2s)
 	{
-		common_solve_get_closest(s1, *(int *)ft_lstget(s2, p), f, -1);
-		if (p < (f->s2s / 2) || f->s2s == 1)
+		if (common_utils_count_moves(p, f->s2s) < (f->s1r + f->s2r))
 		{
-			f->t2r = p;
-			f->t2t = 0;
-		}
-		else
-		{
-			f->t2r = f->s2s - p;
+			common_solve_get_closest(s1, *(int *)ft_lstget(s2, p), f, -1);
+			f->t2r = common_utils_count_moves(p, f->s2s);
 			f->t2t = 1;
-		}
-		if ((f->t1r + f->t2r) < (f->s1r + f->s2r))
-		{
-			f->s1r = f->t1r;
-			f->s1t = f->t1t;
-			f->s2r = f->t2r;
-			f->s2t = f->t2t;
+			if (p < (f->s2s / 2) || f->s2s == 1)
+				f->t2t = 0;
+			if ((f->t1r + f->t2r) < (f->s1r + f->s2r))
+			{
+				f->s1r = f->t1r;
+				f->s1t = f->t1t;
+				f->s2r = f->t2r;
+				f->s2t = f->t2t;
+			}
 		}
 	}
 }

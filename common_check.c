@@ -14,12 +14,13 @@
 
 int	common_check_is_unsorted(t_list *s1, t_list *s2, int *num)
 {
-	t_list	*tmp;
+	t_list		*tmp;
+	const int	len = ft_lstsize(s1);
 
 	if (s2)
 		return (1);
 	tmp = s1;
-	while (tmp)
+	while (tmp && len > 1)
 	{
 		if (tmp->next && *(int *)tmp->content > *(int *)tmp->next->content)
 			return (1);
@@ -32,6 +33,8 @@ int	common_check_is_unsorted(t_list *s1, t_list *s2, int *num)
 		s1 = tmp;
 	}
 	free(num);
+	if (len == 1)
+		common_utils_output(0);
 	return (0);
 }
 
