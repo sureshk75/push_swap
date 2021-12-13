@@ -5,6 +5,3 @@
 
 # Cloning
 Enter `git clone --recursive https://github.com/sureshk75/push_swap.git`
-
-# Notes
-
