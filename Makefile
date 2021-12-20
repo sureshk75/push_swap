@@ -6,7 +6,7 @@
 #    By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 09:45:57 by schetty           #+#    #+#              #
-#    Updated: 2021/12/20 02:52:02 by schetty          ###   ########.fr        #
+#    Updated: 2021/12/20 23:33:33 by schetty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ all			:	$(LIBFT)
 
 bonus		:	$(LIBFT)
 				@ echo Generating $(NAME_BONUS) executable
-				@ $(CC) $(CFLAGS) $(APP1_SOURCE) $(COMM_SOURCE) $(LIBFT) -o $(NAME_BONUS)
+				@ $(CC) $(CFLAGS) $(APP2_SOURCE) $(COMM_SOURCE) $(LIBFT) -o $(NAME_BONUS)
 
 # Link
 $(LIBFT)	:

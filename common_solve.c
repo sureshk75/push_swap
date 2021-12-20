@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 22:04:29 by schetty           #+#    #+#             */
-/*   Updated: 2021/12/11 02:21:54 by schetty          ###   ########.fr       */
+/*   Updated: 2021/12/20 22:59:03 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 static void	common_solve_get_closest(t_list *s, int n, t_flag *f, int i)
 {
 	int	mv;
-	int	n1;
-	int	n2;
+	int	x;
+	int	y;
 
 	mv = 0;
 	while (++i < (f->s1s - 1) && !mv)
 	{
-		n1 = *(int *)ft_lstget(s, i);
-		n2 = *(int *)ft_lstget(s, i + 1);
-		if ((n1 < n2 && n > n1 && n < n2) || (n1 > n2 && (n > n1 || n < n2)))
+		x = *(int *)ft_lstget(s, i);
+		y = *(int *)ft_lstget(s, i + 1);
+		if ((x < y && n > x && n < y) || (x > y && (n > x || n < y)))
 			mv = i + 1;
 	}
 	f->t1r = common_utils_count_moves(mv, f->s1s);
 	f->t1t = 1;
-	if (mv < (f->s1s / 2))
+	if (mv < ((f->s1s / 2) + 0.5) || mv == 1)
 		f->t1t = 0;
 }
 
@@ -41,9 +41,10 @@ static void	common_solve_rotations(t_list *s1, t_list *s2, t_flag *f, int p)
 			common_solve_get_closest(s1, *(int *)ft_lstget(s2, p), f, -1);
 			f->t2r = common_utils_count_moves(p, f->s2s);
 			f->t2t = 1;
-			if (p < (f->s2s / 2) || f->s2s == 1)
+			if (p < ((f->s2s / 2) + 0.5) || f->s2s == 1)
 				f->t2t = 0;
-			if ((f->t1r + f->t2r) < (f->s1r + f->s2r))
+			if ((f->t1t == f->t2t && (f->t1r + f->t2r) <= (f->s1r + f->s2r))
+				|| ((f->t1r + f->t2r) < (f->s1r + f->s2r)))
 			{
 				f->s1r = f->t1r;
 				f->s1t = f->t1t;

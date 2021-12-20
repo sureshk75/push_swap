@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 10:07:49 by schetty           #+#    #+#             */
-/*   Updated: 2021/12/20 08:58:23 by schetty          ###   ########.fr       */
+/*   Updated: 2021/12/20 13:21:50 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ static void	common_check_num(char *str, int *noerr, int *num, int len)
 	if (!*noerr)
 		return ;
 	nb = ft_atoi(str);
-	if ((nb == -1 && ft_strncmp(str, "-1", 3) != 0)
-		|| (nb == 0 && ft_strncmp(str, "0", 2) != 0))
+	if ((nb == -1 && ft_strncmp(str, "-1", 3))
+		|| (nb == 0 && ft_strncmp(str, "0", 2)))
 		*noerr = 0;
 	num[len] = nb;
 	while (*noerr && len--)

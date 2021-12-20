@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 23:17:40 by schetty           #+#    #+#             */
-/*   Updated: 2021/12/20 08:53:20 by schetty          ###   ########.fr       */
+/*   Updated: 2021/12/20 23:43:18 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,14 @@ int	common_utils_gnl(char **str)
 	*str = ft_calloc(6, sizeof(char));
 	if (*str)
 	{
-		i = 0;
-		while (read(0, &((*str)[i]), 1))
+		i = -1;
+		while (++i < 6 && read(0, &((*str)[i]), 1))
 		{
 			if ((*str)[i] == '\n')
 			{
 				(*str)[i] = 0;
 				return (1);
 			}
-			i++;
 		}
 		return (0);
 	}
@@ -95,7 +94,7 @@ int	common_utils_gnl(char **str)
 
 int	common_utils_count_moves(int pos, int size)
 {
-	if (pos < (size / 2) || size == 1)
+	if (pos < ((size / 2) + 0.5) || size == 1)
 		return (pos);
 	return (size - pos);
 }
