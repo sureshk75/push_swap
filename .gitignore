@@ -57,3 +57,4 @@ dkms.conf
 # Project Specific
 push_swap
 checker
+/push_swap_tester
