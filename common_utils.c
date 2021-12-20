@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 23:17:40 by schetty           #+#    #+#             */
-/*   Updated: 2021/12/11 02:23:02 by schetty          ###   ########.fr       */
+/*   Updated: 2021/12/20 08:53:20 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,15 @@ void	common_utils_init_flags(t_list *s1, t_list *s2, t_flag *flg, int pos)
 
 void	common_utils_output(int errno)
 {
-	if (errno == 0)
-		write(1, "\n", 1);
-	else if (errno == 1)
-		ft_putendl_fd("Error", 1);
-	else if (errno == 2)
-		ft_putendl_fd("KO", 1);
-	else
-		ft_putendl_fd("OK", 1);
+	if (errno != 0)
+	{
+		if (errno == 1)
+			ft_putendl_fd("Error", 2);
+		else if (errno == 2)
+			ft_putendl_fd("KO", 1);
+		else
+			ft_putendl_fd("OK", 1);
+	}
 	exit(0);
 }
 

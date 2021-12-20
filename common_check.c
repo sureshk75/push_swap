@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 10:07:49 by schetty           #+#    #+#             */
-/*   Updated: 2021/12/09 20:29:49 by schetty          ###   ########.fr       */
+/*   Updated: 2021/12/20 08:51:36 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,10 @@ int	*common_check_valid(char **str, int len)
 	noerr = 1;
 	i = -1;
 	while (++i < len)
+	{
 		common_check_num(str[i], &noerr, n1, i);
+		free(str[i]);
+	}
 	free(str);
 	if (noerr)
 	{
