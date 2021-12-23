@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 19:49:14 by schetty           #+#    #+#             */
-/*   Updated: 2021/12/21 00:03:05 by schetty          ###   ########.fr       */
+/*   Updated: 2021/12/23 09:15:41 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,41 @@ static void	checker_exit(t_list *s1, t_list *s2, int *num)
 	free(num);
 }
 
-static int	checker_validate(char *str, int ret)
+static int	checker_valid_move(t_list *s1, t_list *s2, char *str, int ret)
+{
+	const int	s1s = ft_lstsize(s1);
+	const int	s2s = ft_lstsize(s2);
+
+	if ((!ft_strncmp(str, "rrr", ret) || !ft_strncmp(str, "rr", ret)
+			|| !ft_strncmp(str, "ss", ret)) && s1s > 1 && s2s > 1)
+		return (1);
+	else if ((!ft_strncmp(str, "rra", ret) || !ft_strncmp(str, "ra", ret)
+			|| !ft_strncmp(str, "sa", ret)) && s1s > 1)
+		return (1);
+	else if ((!ft_strncmp(str, "rrb", ret) || !ft_strncmp(str, "rb", ret)
+			|| !ft_strncmp(str, "sb", ret)) && s2s > 1)
+		return (1);
+	else if ((!ft_strncmp(str, "pa", ret) && s2s)
+		|| (!ft_strncmp(str, "pb", ret) && s1s))
+		return (1);
+	return (-1);
+}
+
+static int	checker_validate(t_list *s1, t_list *s2, char *str, int ret)
 {
 	const int	len = ft_strlen(str);
 
-	if (len == 0)
+	if (len == 0 || (len == 5 && !ft_strncmp(str, "Error", len)))
 		return (ret);
-	else if (len == 5 && !ft_strncmp(str, "Error", len))
-		return (ret);
-	else if (len == 3 && (!ft_strncmp(str, "rrr", len)
-			|| !ft_strncmp(str, "rra", len) || !ft_strncmp(str, "rrb", len)))
-		return (ret);
-	else if (len == 2 && (!ft_strncmp(str, "rr", len)
-			|| !ft_strncmp(str, "ra", len) || !ft_strncmp(str, "rb", len)
-			|| !ft_strncmp(str, "ss", len) || !ft_strncmp(str, "sa", len)
-			|| !ft_strncmp(str, "sb", len) || !ft_strncmp(str, "pa", len)
-			|| !ft_strncmp(str, "pb", len)))
-		return (ret);
+	else if ((len == 3 && (!ft_strncmp(str, "rrr", len)
+				|| !ft_strncmp(str, "rra", len)
+				|| !ft_strncmp(str, "rrb", len)))
+		|| (len == 2 && (!ft_strncmp(str, "rr", len)
+				|| !ft_strncmp(str, "ra", len) || !ft_strncmp(str, "rb", len)
+				|| !ft_strncmp(str, "ss", len) || !ft_strncmp(str, "sa", len)
+				|| !ft_strncmp(str, "sb", len) || !ft_strncmp(str, "pa", len)
+				|| !ft_strncmp(str, "pb", len))))
+		return (checker_valid_move(s1, s2, str, len));
 	return (-1);
 }
 
@@ -63,7 +81,7 @@ static void	checker_listen(t_list **s1, t_list **s2, int *num)
 		ret = common_utils_gnl(&str);
 		if (ret != -1)
 		{
-			ret = checker_validate(str, ret);
+			ret = checker_validate(*s1, *s2, str, ret);
 			if (ret != -1)
 				common_move_execute(s1, s2, str, 0);
 			free(str);

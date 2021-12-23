@@ -6,7 +6,7 @@
 #    By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 09:45:57 by schetty           #+#    #+#              #
-#    Updated: 2021/12/20 23:33:33 by schetty          ###   ########.fr        #
+#    Updated: 2021/12/23 09:24:24 by schetty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,8 @@ bonus		:	$(LIBFT)
 				@ echo Generating $(NAME_BONUS) executable
 				@ $(CC) $(CFLAGS) $(APP2_SOURCE) $(COMM_SOURCE) $(LIBFT) -o $(NAME_BONUS)
 
+checker		:	bonus
+
 # Link
 $(LIBFT)	:
 				@ $(MAKE) bonus -C $(LIBFTDIR) --no-print-directory
@@ -71,4 +73,4 @@ endif
 re			:	fclean all
 
 # Non-File Targets
-.PHONY		:	all clean fclean re bonus
+.PHONY		:	all clean fclean re bonus checker
