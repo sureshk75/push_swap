@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 19:49:14 by schetty           #+#    #+#             */
-/*   Updated: 2021/12/23 11:12:19 by schetty          ###   ########.fr       */
+/*   Updated: 2021/12/23 18:20:29 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	checker_exit(t_list *s1, t_list *s2, int *num)
 	free(num);
 }
 
-static int	checker_valid_move(t_list *s1, t_list *s2, char *str, int ret)
+static int	checker_valid_move(t_list *s1, t_list *s2, char *str)
 {
 	const int	s1s = ft_lstsize(s1);
 	const int	s2s = ft_lstsize(s2);
@@ -65,7 +65,7 @@ static int	checker_validate(t_list *s1, t_list *s2, char *str, int ret)
 				|| !ft_strncmp(str, "ss", 2) || !ft_strncmp(str, "sa", 2)
 				|| !ft_strncmp(str, "sb", 2) || !ft_strncmp(str, "pa", 2)
 				|| !ft_strncmp(str, "pb", 2))))
-		return (checker_valid_move(s1, s2, str, len));
+		return (checker_valid_move(s1, s2, str));
 	return (-1);
 }
 
